@@ -166,6 +166,25 @@
     opacity: .85;
   }
 
+  .hold-flag {
+    position: absolute;
+    top: 0; left: 20px;
+    background: var(--ink);
+    color: var(--card);
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    padding: 5px 10px 6px;
+    border-radius: 0 0 5px 5px;
+  }
+  .well.held img { opacity: .45; filter: saturate(.4); }
+  .card.held .ask { color: var(--dim); }
+  .claim.held {
+    background: transparent;
+    color: var(--dim);
+    border: 1px solid var(--line);
+  }
+
   .count {
     position: absolute;
     top: 12px; right: 14px;
@@ -750,6 +769,7 @@
       name: "Chemex Bonded Filters, 100 Squares",
       photo: "img/chemex-filters.jpg",
       qty: 1,
+      hold: true,
       price: 10,
       note: "or free with the Chemex",
       cond: "New · box opened, filters unused",
@@ -772,6 +792,7 @@
       name: "Chemex Classic 6-Cup Pour-Over",
       photo: "img/chemex.jpg",
       qty: 1,
+      hold: true,
       price: 35,
       note: "",
       cond: "Used · glass clear, collar sound",
@@ -877,8 +898,9 @@
   document.getElementById("grid").innerHTML = ITEMS.map(it => {
     const multi = it.qty > 1;
     return `
-    <article class="card">
-      <div class="well">
+    <article class="card${it.hold ? " held" : ""}">
+      <div class="well${it.hold ? " held" : ""}">
+        ${it.hold ? `<span class="hold-flag">ON HOLD</span>` : ``}
         ${it.photo
           ? `<img src="${it.photo}" alt="${it.name}" />`
           : `${it.art}<span class="art-note">illustration · photo on request</span>`}
@@ -896,7 +918,8 @@
           <span class="ask${it.price === 0 ? " free" : ""}">${tag(it)}</span>
           ${it.note ? `<span class="pricenote">${it.note}</span>` : ``}
         </div>
-        <a class="claim" href="${CONTACT}" target="_blank" rel="noopener">Message me on GroupMe</a>
+        <a class="claim${it.hold ? " held" : ""}" href="${CONTACT}" target="_blank" rel="noopener">${
+          it.hold ? "On hold — ask to be next" : "Message me on GroupMe"}</a>
       </div>
     </article>`;
   }).join("");
