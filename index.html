@@ -306,8 +306,8 @@
   <div class="wrap">
     <h2>How to buy</h2>
     <p>
-      Want any of these? Hit <strong>WhatsApp me</strong> on the item and it opens a
-      message to me. First come, first served — listings come down as things go.
+      Want any of these? Hit <strong>Message me on GroupMe</strong> and tell me which
+      item. First come, first served — listings come down as things go.
       The more you buy, the cheaper I'll make it.
     </p>
     <p>Every photo here is the actual item.</p>
@@ -868,7 +868,7 @@
     }
   ];
 
-  const WHATSAPP = "2348187350725";
+  const CONTACT = "https://groupme.com/contact/30511502/G4x0Tt6h";
 
   /* ---------- price display ---------- */
   const tag = it => it.price === 0 ? "Free" : "$" + it.price;
@@ -896,8 +896,7 @@
           <span class="ask${it.price === 0 ? " free" : ""}">${tag(it)}</span>
           ${it.note ? `<span class="pricenote">${it.note}</span>` : ``}
         </div>
-        <a class="claim" href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi! I'd like the " + it.name + " from your sale.")}"
-           target="_blank" rel="noopener">WhatsApp me</a>
+        <a class="claim" href="${CONTACT}" target="_blank" rel="noopener">Message me on GroupMe</a>
       </div>
     </article>`;
   }).join("");
